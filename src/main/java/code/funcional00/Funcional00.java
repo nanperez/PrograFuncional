@@ -1,5 +1,5 @@
 
-package com.mycompany.funcional00;
+package code.funcional00;
 
 
 
