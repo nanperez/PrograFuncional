@@ -21,20 +21,32 @@ public class SensorTemperaturaApp {
         String lugar = "Sala de software";
         // Tarea 1: Generar lecturas del sensor
         Runnable generarLecturas =()->{
-            
-            // Aqui vamos a capturar las fecha y hora local
-            
-            
+                               
             // Generar 20 lecturas de 20 a 40 °C
             for (int i = 0; i < 20; i++) {
                 double temp = 20.0 + random.nextDouble()*20.0;
                 LecturaSensor lectura = new LecturaSensor(
                         LocalDateTime.now(), lugar, temp);
+                
+                // Agregamos un tiempo de espera para que la lectura
+                // de la fecha y hora cambie
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException ex) {
+                    System.getLogger(SensorTemperaturaApp.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
+                // Agregamos las lecturas a la lista
+                lecturas.add(lectura);
             }
         
-        
-        
+        // Foreach Usando lambda,versión larga
+        // lecturas.forEach(l -> System.out.println(nombre));
+        // Foreach usando lambda, versión compacta
+        lecturas.forEach(System.out::println);
+            
         };
+        
+       generarLecturas.run();
         
         
     }
